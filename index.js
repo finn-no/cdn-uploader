@@ -20,7 +20,7 @@ uploader.upload(program.appPrefix, program.assetsFolder, (err, uploadedAssets) =
     if (err) {
         throw err;
     } else {
-        console.log('-- Uploaded assets metadata -- ');
+        console.log('-- Uploaded assets -- ');
         uploadedAssets.forEach(item => console.log(item.destination));
     }
 });
