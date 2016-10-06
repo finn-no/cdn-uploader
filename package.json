@@ -1,0 +1,30 @@
+{
+  "name": "@finn-no/cdn-uploader",
+  "version": "1.0.0",
+  "description": "Small tool uploading assets to CDN backend (gke-storage)",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.schibsted.io:finn/cdn-uploader.git"
+  },
+  "keywords": [
+    "CDN",
+    "upload",
+    "assets"
+  ],
+  "author": "",
+  "license": "Unlicense",
+  "dependencies": {
+    "@google-cloud/storage": "^0.2.0",
+    "async": "^2.0.1",
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.7.0",
+    "eslint-config-finn": "^1.0.0-alpha.14"
+  }
+}
