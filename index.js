@@ -1,22 +1,23 @@
 #!/usr/bin/env node
 'use strict';
 
-const program = require('commander');
+const argv = require('yargs')
+    .usage('cdn-uploader -a <appPrefix> -f <dir>')
+    .option('appPrefix', {
+        alias: 'a',
+        describe: 'Application prefix used in the CDN url',
+        demand: true,
+    })
+    .option('assetsFolder', {
+        alias: 'f',
+        describe: 'Folder contaning the assets that should be uploaded',
+        demand: true,
+    })
+    .argv;
+
 const uploader = require('./uploader');
 
-program
-    .option('-a, --appPrefix <appPrefix>', 'The app prefix used for static assets')
-    .option('-f, --assetsFolder <dir>', 'Folder contaning the assets that should be uploaded.')
-    .parse(process.argv);
-
-// Check input args
-if (!program.appPrefix || !program.assetsFolder) {
-    console.error('You must specify required args "appPrefix" and "assetsFolder"');
-    process.exit(-1);
-}
-
-
-uploader.upload(program.appPrefix, program.assetsFolder, (err, uploadedAssets) => {
+uploader.upload(argv.appPrefix, argv.assetsFolder, (err, uploadedAssets) => {
     if (err) {
         throw err;
     } else {

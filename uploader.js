@@ -44,7 +44,6 @@ function uploadToCloud (appPrefix, assets, cb) {
     async.parallel(uploadRequests, cb);
 }
 
-
 function upload (appPrefix, assetsFolder, cb) {
     if (!isDirectory(assetsFolder)) {
         throw new Error('Assets folder must be directory');
@@ -52,8 +51,5 @@ function upload (appPrefix, assetsFolder, cb) {
     const assets = getFilesToUpload(assetsFolder);
     uploadToCloud(appPrefix, assets, cb);
 }
-
-
-
 
 module.exports = { upload };

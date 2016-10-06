@@ -24,7 +24,7 @@
   "dependencies": {
     "@google-cloud/storage": "^0.2.0",
     "async": "^2.0.1",
-    "commander": "^2.9.0"
+    "yargs": "^6.0.0"
   },
   "devDependencies": {
     "eslint": "^3.7.0",
