@@ -6,21 +6,21 @@ const argv = require('yargs')
     .usage('$0 <assetsFolder> [args]')
     .demand(1)
     .env('CDN_UPLOADER')
-    .option('appPrefix', {
+    .option('app-prefix', {
         alias: 'a',
         describe: 'Application prefix used in the CDN url',
         demand: true,
     })
-    .option('keyFilename', {
+    .option('key-filename', {
         alias: 'k',
         describe: 'JSON key file used to authenticate with GCE. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.',
     })
-    .option('bucketName', {
+    .option('bucket-name', {
         alias: 'b',
         default: 'fiaas-assets',
         describe: 'Google Cloud Storage bucket to use.',
     })
-    .option('projectId', {
+    .option('project-id', {
         alias: 'p',
         default: 'fiaas-gke',
         describe: 'Google Cloud Storage projectId.',
