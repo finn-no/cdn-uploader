@@ -3,7 +3,7 @@ Small tool uploading assets to CDN backend (gke-storage)
 
 ## Requirements
 You must either specify keyfile or set the `FINN_CDN_UPLOADER_CREDENTIALS` environment variable which is a
-`JSON.stringify` version of the JSON based keyfile containing credentials talking to GKE.  
+`JSON.stringify` version of the JSON based keyfile containing credentials talking to GKE.
 
 ## Usage
 
