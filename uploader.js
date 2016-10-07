@@ -31,7 +31,12 @@ function getFilesToUpload (assetsFolder, subDir = '') {
 }
 
 function uploadToGKS (bucket, asset, cb) {
-    bucket.upload(asset.path, { destination: asset.destination, public: true }, (err) => cb(err, asset));
+    const options = {
+        destination: asset.destination,
+        public: true,
+        metadata: { cacheControl: 'public, max-age=108000' },
+    };
+    bucket.upload(asset.path, options, (err) => cb(err, asset));
 }
 
 function uploadToCloud (appPrefix, assets, cb) {
