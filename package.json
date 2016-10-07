@@ -22,9 +22,7 @@
     "assets"
   ],
   "author": "",
-  "bin": {
-    "cdn-uploader": "./index.js"
-  },
+  "bin": "./index.js",
   "license": "Unlicense",
   "dependencies": {
     "@google-cloud/storage": "^0.2.0",
