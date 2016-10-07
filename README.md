@@ -7,14 +7,34 @@ You must either specify keyfile or set the `FINN_CDN_UPLOADER_CREDENTIALS` envir
 
 ## Usage
 
+Install:
 ```bash
 $ npm install cdn-uploader -g
+```
 
-$ cdn-uploader -a finnlet-server -f /tmp/cdnAssets
+Actual usage:
+```bash
+$ cdn-uploader /tmp/cdnAssets -a finnlet-server
 -- Uploaded assets -- 
 testApp/example.jpg
 testApp/css/SDFSDF.finn.css
 testApp/js/SDFSDF.finn.js
+```
+
+Get help:
+```bash
+$ cdn-uploader -h               
+cdn-uploader <assetsFolder> [args]
+
+Options:
+  --appPrefix, -a    Application prefix used in the CDN url           [required]
+  --keyFilename, -k  JSON key file used to authenticate with GKE. If not set
+                     FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.
+  --bucketName, -b   GKE storage bucket to use.        [default: "fiaas-assets"]
+  --projectId, -p    GKE storage projectId.               [default: "fiaas-gke"]
+
+Not enough non-option arguments: got 0, need at least 1
+
 ```
 
 ### Excluded files
