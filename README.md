@@ -2,8 +2,8 @@
 Small tool uploading assets to CDN backend (gke-storage)
 
 ## Requirements
-You must either specify keyfile or set the `FINN_CDN_UPLOADER_CREDENTIALS` environment variable which is a 
-`JSON.stringify` version of the JSON based keyfile containing credentials talking to GKE.   
+You must either specify keyfile or set the `FINN_CDN_UPLOADER_CREDENTIALS` environment variable which is a
+`JSON.stringify` version of the JSON based keyfile containing credentials talking to GKE.  
 
 ## Usage
 
@@ -15,7 +15,7 @@ $ npm install cdn-uploader -g
 Actual usage:
 ```bash
 $ cdn-uploader /tmp/cdnAssets -a finnlet-server
--- Uploaded assets -- 
+-- Uploaded assets --
 testApp/example.jpg
 testApp/css/SDFSDF.finn.css
 testApp/js/SDFSDF.finn.js
@@ -36,7 +36,7 @@ Options:
 ```
 
 ### Excluded files
-All files or folder beginning with a "." is automatically excluded (e.g. `.gitignore`) and will not be uploaded. 
+All files or folder beginning with a "." is automatically excluded (e.g. `.gitignore`) and will not be uploaded.
 
 ### Advanced
 You may also override other options if you like (handy for testing)
@@ -46,7 +46,7 @@ You may also override other options if you like (handy for testing)
 - `--projectId` - GKE storage projectId.
 
 ## Where does my files end up?
-The files uploaded to GKE is made available on the public google storage hosting at: 
+The files uploaded to GKE is made available on the public google storage hosting at:
 
 `https://storage.googleapis.com/fiaas-assets/<appPrefix>/<assetName>`
 
@@ -56,5 +56,5 @@ This is again exposed by our CDN at:
 
 
 ## Cache time?
-All files uploaded to CDN is configured with `Cache-Control: public, max-age=108000`, 
-meaning all your assets will be cached in 30 days. 
+All files uploaded to CDN is configured with `Cache-Control: public, max-age=108000`,
+meaning all your assets will be cached in 30 days.
