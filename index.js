@@ -5,6 +5,7 @@ const uploader = require('./uploader');
 const argv = require('yargs')
     .usage('$0 <assetsFolder> [args]')
     .demand(1)
+    .env('CDN_UPLOADER')
     .option('appPrefix', {
         alias: 'a',
         describe: 'Application prefix used in the CDN url',
