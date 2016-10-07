@@ -5,7 +5,6 @@ const uploader = require('./uploader');
 const argv = require('yargs')
     .usage('$0 <assetsFolder> [args]')
     .demand(1)
-    .default({ bucketName: 'fiaas-assets', projectId: 'fiaas-gke' })
     .option('appPrefix', {
         alias: 'a',
         describe: 'Application prefix used in the CDN url',
@@ -17,10 +16,12 @@ const argv = require('yargs')
     })
     .option('bucketName', {
         alias: 'b',
+        default: 'fiaas-assets',
         describe: 'Google Cloud Storage bucket to use.',
     })
     .option('projectId', {
         alias: 'p',
+        default: 'fiaas-gke',
         describe: 'Google Cloud Storage projectId.',
     })
     .argv;
