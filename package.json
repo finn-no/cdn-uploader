@@ -30,8 +30,8 @@
     "yargs": "^6.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.7.0",
-    "eslint-config-finn": "^1.0.0-alpha.14"
+    "eslint": "^3.7.1",
+    "eslint-config-finn": "^1.0.0-beta.1"
   },
   "publishConfig": {
     "registry": "http://npm.finntech.no/"
