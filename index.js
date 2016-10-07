@@ -13,15 +13,15 @@ const argv = require('yargs')
     })
     .option('keyFilename', {
         alias: 'k',
-        describe: 'JSON key file used to authenticate with GKE. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.',
+        describe: 'JSON key file used to authenticate with GCE. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.',
     })
     .option('bucketName', {
         alias: 'b',
-        describe: 'GKE storage bucket to use.',
+        describe: 'Google Cloud Storage bucket to use.',
     })
     .option('projectId', {
         alias: 'p',
-        describe: 'GKE storage projectId.',
+        describe: 'Google Cloud Storage projectId.',
     })
     .argv;
 

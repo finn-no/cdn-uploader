@@ -1,7 +1,7 @@
 {
   "name": "@finn-no/cdn-uploader",
   "version": "1.0.0",
-  "description": "Small tool uploading assets to CDN backend (gke-storage)",
+  "description": "Small tool uploading assets to CDN backend (Google Cloud Storage)",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",

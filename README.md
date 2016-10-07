@@ -23,18 +23,16 @@ testApp/js/SDFSDF.finn.js
 
 Get help:
 ```bash
-$ cdn-uploader -h               
+$ cdn-uploader -h
 cdn-uploader <assetsFolder> [args]
 
 Options:
   --appPrefix, -a    Application prefix used in the CDN url           [required]
-  --keyFilename, -k  JSON key file used to authenticate with GKE. If not set
+  --keyFilename, -k  JSON key file used to authenticate with GCE. If not set
                      FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.
-  --bucketName, -b   GKE storage bucket to use.        [default: "fiaas-assets"]
-  --projectId, -p    GKE storage projectId.               [default: "fiaas-gke"]
-
-Not enough non-option arguments: got 0, need at least 1
-
+  --bucketName, -b   Google Cloud Storage bucket to use.
+                                                       [default: "fiaas-assets"]
+  --projectId, -p    Google Cloud Storage projectId.      [default: "fiaas-gke"]
 ```
 
 ### Excluded files
