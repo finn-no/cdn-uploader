@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Small tool uploading assets to CDN backend (Google Cloud Storage)",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "file-util.js",
+    "uploader.js"
+  ],
   "scripts": {
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,5 +34,8 @@
   "devDependencies": {
     "eslint": "^3.7.0",
     "eslint-config-finn": "^1.0.0-alpha.14"
+  },
+  "publishConfig": {
+    "registry": "http://npm.finntech.no/"
   }
 }
