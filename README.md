@@ -17,8 +17,15 @@ testApp/css/SDFSDF.finn.css
 testApp/js/SDFSDF.finn.js
 ```
 
+### Excluded files
+All files or folder beginning with a "." is automatically excluded (e.g. `.gitignore`) and will not be uploaded. 
+
 ### Advanced
-You 
+You may also override other options if you like (handy for testing)
+
+- `--keyFilename` - JSON key file used to authenticate with GKE. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.
+- `--bucketName` - GKE storage bucket to use.
+- `--projectId` - GKE storage projectId.
 
 ## Where does my files end up?
 The files uploaded to GKE is made available on the public google storage hosting at: 
