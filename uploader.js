@@ -8,7 +8,7 @@ const gks = require('@google-cloud/storage');
 const OPTIONS = {
     bucketName: 'fiaas-assets',
     projectId: 'fiaas-gke',
-    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS || `${__dirname}/config.json`,
+    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS || path.join(__dirname, 'config.json'),
 };
 
 const storage = gks({
@@ -26,7 +26,7 @@ function getFilesToUpload (assetsFolder, subDir = '') {
             name: `${subDir}${file}`,
             path: path.join(assetsFolder, file),
         };
-        return list.concat(isDirectory(asset.path) ? getFilesToUpload(asset.path, `${asset.name}/`) : [asset]);
+        return list.concat(isDirectory(asset.path) ? getFilesToUpload(asset.path, `${asset.name}${path.sep}`) : [asset]);
     }, []);
 }
 
