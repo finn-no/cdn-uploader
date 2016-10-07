@@ -1,60 +1,39 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const async = require('async');
 const gks = require('@google-cloud/storage');
-
-const OPTIONS = {
-    bucketName: 'fiaas-assets',
-    projectId: 'fiaas-gke',
-    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS || path.join(__dirname, 'config.json'),
-};
-
-const storage = gks({
-    projectId: OPTIONS.bucketName,
-    keyFilename: OPTIONS.keyFilename,
-});
-
-function isDirectory (dir) {
-    return fs.lstatSync(dir).isDirectory();
-}
-
-function getFilesToUpload (assetsFolder, subDir = '') {
-    return fs.readdirSync(assetsFolder).reduce((list, file) => {
-        const asset = {
-            name: `${subDir}${file}`,
-            path: path.join(assetsFolder, file),
-        };
-        return list.concat(isDirectory(asset.path) ? getFilesToUpload(asset.path, `${asset.name}${path.sep}`) : [asset]);
-    }, []);
-}
+const { isDirectory, getFilesToUpload } = require('./file-util');
 
 function uploadToGKS (bucket, asset, cb) {
-    const options = {
+    const uploadOpt = {
         destination: asset.destination,
         public: true,
         metadata: { cacheControl: 'public, max-age=108000' },
     };
-    bucket.upload(asset.path, options, (err) => cb(err, asset));
+    bucket.upload(asset.path, uploadOpt, (err) => cb(err, asset));
 }
 
-function uploadToCloud (appPrefix, assets, cb) {
-    const bucket = storage.bucket(OPTIONS.bucketName);
+function uploadToCloud (options, assets, cb) {
+    const storage = gks({
+        projectId: options.projectId,
+        credentials: options.credentials,
+    });
+
+    const bucket = storage.bucket(options.bucketName);
 
     const uploadRequests = assets
-        .map(a => Object.assign({}, a, { destination: `${appPrefix}/${a.name}` }))
+        .map(a => Object.assign({}, a, { destination: `${options.appPrefix}/${a.name}` }))
         .map(a => uploadToGKS.bind(null, bucket, a));
 
     async.parallel(uploadRequests, cb);
 }
 
-function upload (appPrefix, assetsFolder, cb) {
-    if (!isDirectory(assetsFolder)) {
+function upload (options, cb) {
+    if (!isDirectory(options.assetsFolder)) {
         throw new Error('Assets folder must be directory');
     }
-    const assets = getFilesToUpload(assetsFolder);
-    uploadToCloud(appPrefix, assets, cb);
+    const assets = getFilesToUpload(options.assetsFolder);
+    uploadToCloud(options, assets, cb);
 }
 
 module.exports = { upload };

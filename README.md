@@ -2,8 +2,8 @@
 Small tool uploading assets to CDN backend (gke-storage)
 
 ## Requirements
-You must set the `GOOGLE_APPLICATION_CREDENTIAL` environment variable to point to the google 
-json based keyfile containing credentials talking to GKE.   
+You must either specify keyfile or set the `FINN_CDN_UPLOADER_CREDENTIALS` environment variable which is a 
+`JSON.stringify` version of the JSON based keyfile containing credentials talking to GKE.   
 
 ## Usage
 
@@ -16,6 +16,9 @@ testApp/example.jpg
 testApp/css/SDFSDF.finn.css
 testApp/js/SDFSDF.finn.js
 ```
+
+### Advanced
+You 
 
 ## Where does my files end up?
 The files uploaded to GKE is made available on the public google storage hosting at: 
