@@ -45,6 +45,8 @@ You may also override other options if you like (handy for testing)
 - `--bucketName` - GKE storage bucket to use.
 - `--projectId` - GKE storage projectId.
 
+You can also use environment variables for these options, just use the prefix `CDN_UPLOADER_`.
+
 ## Where does my files end up?
 The files uploaded to GKE is made available on the public google storage hosting at:
 
