@@ -27,12 +27,13 @@ $ cdn-uploader -h
 cdn-uploader <assetsFolder> [args]
 
 Options:
-  --appPrefix, -a    Application prefix used in the CDN url           [required]
-  --keyFilename, -k  JSON key file used to authenticate with GCE. If not set
-                     FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.
-  --bucketName, -b   Google Cloud Storage bucket to use.
+  --app-prefix, -a    Application prefix used in the CDN url          [required]
+  --key-filename, -k  JSON key file used to authenticate with GCE. If not set
+                      FINN_CDN_UPLOADER_CREDENTIALS environment variable is
+                      used.
+  --bucket-name, -b   Google Cloud Storage bucket to use.
                                                        [default: "fiaas-assets"]
-  --projectId, -p    Google Cloud Storage projectId.      [default: "fiaas-gke"]
+  --project-id, -p    Google Cloud Storage projectId.     [default: "fiaas-gke"]
 ```
 
 ### Excluded files
@@ -41,9 +42,9 @@ All files or folder beginning with a "." is automatically excluded (e.g. `.gitig
 ### Advanced
 You may also override other options if you like (handy for testing)
 
-- `--keyFilename` - JSON key file used to authenticate with GKE. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.
-- `--bucketName` - GKE storage bucket to use.
-- `--projectId` - GKE storage projectId.
+- `--key-filename` - JSON key file used to authenticate with GKE. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.
+- `--bucket-name` - GKE storage bucket to use.
+- `--project-id` - GKE storage projectId.
 
 You can also use environment variables for these options, just use the prefix `CDN_UPLOADER_`.
 
