@@ -2,8 +2,9 @@
 Small tool uploading assets to CDN backend (gke-storage)
 
 ## Requirements
-You must either specify keyfile or set the `FINN_CDN_UPLOADER_CREDENTIALS` environment variable which is a
-`JSON.stringify` version of the JSON based keyfile containing credentials talking to GKE.
+You must either specify key-filename or specify credentials which is a
+`JSON.stringify` version of the JSON based keyfile containing credentials 
+used when talking to GCE.
 
 ## Usage
 
@@ -14,11 +15,11 @@ $ npm install cdn-uploader -g
 
 Actual usage:
 ```bash
-$ cdn-uploader /tmp/cdnAssets -a finnlet-server
+$ cdn-uploader /tmp/cdn-assets -a finnlet-server
 -- Uploaded assets --
-testApp/example.jpg
-testApp/css/SDFSDF.finn.css
-testApp/js/SDFSDF.finn.js
+test-app/example.jpg
+test-app/css/SDFSDF.finn.css
+test-app/js/SDFSDF.finn.js
 ```
 
 Get help:
@@ -28,13 +29,19 @@ cdn-uploader <assetsFolder> [args]
 
 Options:
   --app-prefix, -a    Application prefix used in the CDN url          [required]
-  --key-filename, -k  JSON key file used to authenticate with GCE. If not set
-                      FINN_CDN_UPLOADER_CREDENTIALS environment variable is
-                      used.
+  --key-filename, -k  JSON key file used to authenticate with GCE. If not set,
+                      the credentials option is used.
+  --credentials, -c   Stringified version of the JSON key file used to
+                      authenticate with GCE.
+                      Can also be set as CDN_UPLOADER_CREDENTIALS environment
+                      variable
   --bucket-name, -b   Google Cloud Storage bucket to use.
                                                        [default: "fiaas-assets"]
   --project-id, -p    Google Cloud Storage projectId.     [default: "fiaas-gke"]
 ```
+
+All options can also be set as environment variables, using the `CDN_UPLOADER_` prefix. 
+E.g.: `CDN_UPLOADER_APP_PREFIX`, `CDN_UPLOADER_CREDENTIALS`, etc.
 
 ### Excluded files
 All files or folder beginning with a "." is automatically excluded (e.g. `.gitignore`) and will not be uploaded.
@@ -51,11 +58,11 @@ You can also use environment variables for these options, just use the prefix `C
 ## Where does my files end up?
 The files uploaded to GKE is made available on the public google storage hosting at:
 
-`https://storage.googleapis.com/fiaas-assets/<appPrefix>/<assetName>`
+`https://storage.googleapis.com/<bucket-name>/<app-prefix>/<assetName>`
 
 This is again exposed by our CDN at:
 
-`https://static.finncdn.no/_c/<appPrefix>/<assetName>`
+`https://static.finncdn.no/_c/<app-prefix>/<assetName>`
 
 
 ## Cache time?

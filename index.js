@@ -13,7 +13,12 @@ const argv = require('yargs')
     })
     .option('key-filename', {
         alias: 'k',
-        describe: 'JSON key file used to authenticate with GCE. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.',
+        describe: 'JSON key file used to authenticate with GCE. If not set, the credentials option is used.',
+    })
+    .option('credentials', {
+        alias: 'c',
+        describe: `Stringified version of the JSON key file used to authenticate with GCE. 
+        Can also be set as CDN_UPLOADER_CREDENTIALS environment variable`,
     })
     .option('bucket-name', {
         alias: 'b',
@@ -27,22 +32,24 @@ const argv = require('yargs')
     })
     .argv;
 
-function loadCredentials (keyFilename) {
-    if (keyFilename) {
-        return require(keyFilename);
-    } else {
+function loadCredentials (args) {
+    if (args.keyFilename) {
+        return require(args.keyFilename);
+    } else if (args.credentials) {
         try {
-            const credentialString = process.env.FINN_CDN_UPLOADER_CREDENTIALS;
-            return JSON.parse(credentialString.replace(/\\n/g, 'n'));
+            return JSON.parse(args.credentials.replace(/\\n/g, 'n'));
         } catch (err) {
-            console.error('Unable to parse FINN_CDN_UPLOADER_CREDENTIALS and --keyFilename not set');
+            console.error('Unable to parse credentials string');
             process.exit(1);
         }
+    } else {
+        console.error('You must either specify the key-filename or the credentials string to authenticate with GCE');
+        process.exit(1);
     }
 }
 
 function getOptions (args) {
-    const credentials = loadCredentials(args.keyFilename);
+    const credentials = loadCredentials(args);
     const assetsFolder = args._[0];
     return Object.assign({}, args, { credentials, assetsFolder });
 }
