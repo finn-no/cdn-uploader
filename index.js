@@ -30,6 +30,10 @@ const argv = require('yargs')
         default: 'fiaas-gke',
         describe: 'Google Cloud Storage projectId.',
     })
+    .option('cache-control', {
+        default: 'public, max-age=108000',
+        describe: 'Overide the cache-control header for the assets',
+    })
     .argv;
 
 function loadCredentials (args) {

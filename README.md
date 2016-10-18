@@ -38,6 +38,8 @@ Options:
   --bucket-name, -b   Google Cloud Storage bucket to use.
                                                        [default: "fiaas-assets"]
   --project-id, -p    Google Cloud Storage projectId.     [default: "fiaas-gke"]
+  --cache-control     Overide the cache-control header for the assets
+                                             [default: "public, max-age=108000"]
 ```
 
 All options can also be set as environment variables, using the `CDN_UPLOADER_` prefix. 
