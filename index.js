@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const uploader = require('./uploader');
+const uploader = require('./lib/uploader');
 const argv = require('yargs')
     .usage('$0 <assetsFolder> [args]')
     .demand(1)

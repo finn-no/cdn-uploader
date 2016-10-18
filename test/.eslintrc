@@ -1,0 +1,7 @@
+{
+    "extends": "plugin:ava/recommended",
+    "plugins": ["ava"],
+    "rules": {
+        "ava/prefer-power-assert": 2
+    }
+}

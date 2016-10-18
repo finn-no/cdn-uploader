@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -23,14 +23,16 @@
   ],
   "author": "",
   "bin": "./index.js",
-  "license": "Unlicense",
+  "license": "MIT",
   "dependencies": {
     "@google-cloud/storage": "^0.2.0",
     "async": "^2.0.1",
     "yargs": "^6.0.0"
   },
   "devDependencies": {
+    "ava": "^0.16.0",
     "eslint": "^3.7.1",
-    "eslint-config-finn": "^1.0.0-beta.1"
+    "eslint-config-finn": "^1.0.0-beta.1",
+    "eslint-plugin-ava": "^3.1.1"
   }
 }
