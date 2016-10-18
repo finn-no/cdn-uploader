@@ -1,6 +1,6 @@
 {
   "name": "@finn-no/cdn-uploader",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Small tool uploading assets to CDN backend (Google Cloud Storage)",
   "main": "index.js",
   "files": [
@@ -32,8 +32,5 @@
   "devDependencies": {
     "eslint": "^3.7.1",
     "eslint-config-finn": "^1.0.0-beta.1"
-  },
-  "publishConfig": {
-    "registry": "http://npm.finntech.no/"
   }
 }
