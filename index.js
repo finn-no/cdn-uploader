@@ -3,7 +3,7 @@
 
 const uploader = require('./lib/uploader');
 const argv = require('yargs')
-    .usage('$0 <assetsFolder> [args]')
+    .usage('$0 [options] <assetsFolder>')
     .demand(1)
     .env('CDN_UPLOADER')
     .option('app-prefix', {

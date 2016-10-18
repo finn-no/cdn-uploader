@@ -25,7 +25,7 @@ test-app/js/SDFSDF.finn.js
 Get help:
 ```bash
 $ cdn-uploader -h
-cdn-uploader <assetsFolder> [args]
+cdn-uploader [options] <assetsFolder>
 
 Options:
   --app-prefix, -a    Application prefix used in the CDN url          [required]
