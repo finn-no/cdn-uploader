@@ -1,5 +1,7 @@
 # cdn-uploader
-Small tool uploading assets to CDN backend (gke-storage)
+> Small tool uploading assets to CDN backend (gke-storage)
+
+[![Build Status](https://travis-ci.org/finn-no/cdn-uploader.svg?branch=master)](https://travis-ci.org/finn-no/cdn-uploader)
 
 ## Requirements
 You must either specify key-filename or specify credentials which is a
