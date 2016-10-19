@@ -13,10 +13,7 @@
     "test": "ava",
     "travis": "npm run lint && npm run test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.schibsted.io:finn/cdn-uploader.git"
-  },
+  "repository": "finn-no/cdn-uploader",
   "keywords": [
     "CDN",
     "upload",
