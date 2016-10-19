@@ -1,14 +1,23 @@
 language: node_js
 node_js:
-  - 7
-  - 6
+- 7
+- 6
 script: yarn run travis
 cache: yarn
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
+deploy:
+  provider: releases
+  api_key:
+    secure: Z2QwMzGV8NuhX1Ctt7MEc5TCloo0gv22CEGarIFVZUUwocGZ5sqs3EgpHwa04qezo4UfoGBGuRpsuBA+MMX6/TD1E9fYJp9O2g/yRSOtW2AVPwKU1Ue3tIXVZm4mqAc6EKDiuYviDQlwHGbYMs2HW8wngiPg2Zv8glVRKKOypwcOFnbfmOZmsbkWZ32a0+SSDUanq3raQ50HEYiyCBGfr7+XRizy37y8b5pu3a/euyOE1SxnDcbofcAbmVMBSh8k67etQfTccdOzkyuR2IusFoFgY1kW1CWztqjdvutelkmVMcExij9isXi6BvSRWQ+qss6xjZvzKNVdIQ5gWOyb2+QZ5VjnXrAckZYA9eS2f8kGepnhk7nVE54ya61rPwVdS9qg6mCD99vE+rBKxaPSPht50P4LfqKg2M8N1mc4ghC80H6cvc20rmmtpNIe08ADh1lT8eNAA1XnNxU7tQXZwpVAqrURIDmLbsVwGRoWfF4+Ah+DT4onLp5PhwDhVZ4F5jUchTjuInRnAcTk8l2IUffwv8TTFOC5nqFTg2vG/pMH/BG1PpoB8fI2YnmQHygL3k528yXEHgLYMLuZTmQ3+pY9UrIBQCkNmr3ie7skTnTRZrCQqVJNPNssV2xpsgWtc+wYnzBqp2XTs7U87TIcSxD/4tQZb7IUZ8zA7dsIvy4=
+  file: cdn-uploader-*.nar
+  skip_cleanup: true
+  on:
+    repo: finn-no/cdn-uploader
+    tags: true
