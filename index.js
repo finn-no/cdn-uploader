@@ -13,11 +13,12 @@ const argv = require('yargs')
     })
     .option('key-filename', {
         alias: 'k',
-        describe: 'JSON key file used to authenticate with GCE. If not set, the credentials option is used.',
+        describe: `JSON key file used to authenticate with Google Cloud Platform.
+        If not set, the credentials option is used.`,
     })
     .option('credentials', {
         alias: 'c',
-        describe: `Stringified version of the JSON key file used to authenticate with GCE. 
+        describe: `Stringified version of the JSON key file used to authenticate with Google Cloud Platform.
         Can also be set as CDN_UPLOADER_CREDENTIALS environment variable`,
     })
     .option('bucket-name', {
@@ -47,7 +48,7 @@ function loadCredentials (args) {
             process.exit(1);
         }
     } else {
-        console.error('You must either specify the key-filename or the credentials string to authenticate with GCE');
+        console.error('You must either specify the key-filename or the credentials string to authenticate with Google Cloud Platform');
         process.exit(1);
     }
 }
