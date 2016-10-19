@@ -32,7 +32,7 @@ const argv = require('yargs')
     })
     .option('cache-control', {
         default: 'public, max-age=108000',
-        describe: 'Overide the cache-control header for the assets',
+        describe: 'Override the cache-control header for the assets',
     })
     .argv;
 
@@ -60,11 +60,8 @@ function getOptions (args) {
 
 const options = getOptions(argv);
 
-uploader.upload(options, (err, uploadedAssets) => {
-    if (err) {
-        throw err;
-    } else {
+uploader.upload(options)
+    .then(uploadedAssets => {
         console.log('---Uploaded assets---');
-        uploadedAssets.forEach(item => console.log(item.destination));
-    }
-});
+        uploadedAssets.map(item => item.destination).forEach(console.log);
+    });
