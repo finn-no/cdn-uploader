@@ -25,21 +25,23 @@ test-app/js/SDFSDF.finn.js
 ```
 
 Get help:
-```bash
+```sh-session
 $ cdn-uploader -h
 cdn-uploader [options] <assetsFolder>
 
 Options:
   --app-prefix, -a    Application prefix used in the CDN url          [required]
   --key-filename, -k  JSON key file used to authenticate with Google Cloud
-                      Platform (GCP). If not set, the credentials option is used
+                      Platform.
+                      If not set, the credentials option is used.
   --credentials, -c   Stringified version of the JSON key file used to
-                      authenticate with GCP.
+                      authenticate with Google Cloud Platform.
                       Can also be set as CDN_UPLOADER_CREDENTIALS environment
                       variable
-  --bucket-name, -b   GCS bucket to use.               [default: "fiaas-assets"]
-  --project-id, -p    GCS projectId.                      [default: "fiaas-gke"]
-  --cache-control     Overide the cache-control header for the assets
+  --bucket-name, -b   Google Cloud Storage bucket to use.
+                                                       [default: "fiaas-assets"]
+  --project-id, -p    Google Cloud Storage projectId.     [default: "fiaas-gke"]
+  --cache-control     Override the cache-control header for the assets
                                              [default: "public, max-age=108000"]
 ```
 
