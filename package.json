@@ -5,8 +5,7 @@
   "main": "index.js",
   "files": [
     "index.js",
-    "file-util.js",
-    "uploader.js"
+    "lib/"
   ],
   "scripts": {
     "lint": "eslint .",
