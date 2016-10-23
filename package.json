@@ -18,7 +18,7 @@
     "upload",
     "assets"
   ],
-  "author": "",
+  "author": "FINN.no <npm@finn.no>",
   "bin": "./index.js",
   "license": "MIT",
   "dependencies": {
