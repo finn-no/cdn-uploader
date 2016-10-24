@@ -11,12 +11,12 @@ used when talking to Google Cloud Storage (GCS).
 ## Usage
 
 Install:
-```bash
+```sh-session
 $ npm install cdn-uploader -g
 ```
 
 Actual usage:
-```bash
+```sh-session
 $ cdn-uploader /tmp/cdn-assets -a finnlet-server
 -- Uploaded assets --
 test-app/example.jpg
@@ -30,19 +30,22 @@ $ cdn-uploader -h
 cdn-uploader [options] <assetsFolder>
 
 Options:
-  --app-prefix, -a    Application prefix used in the CDN url          [required]
+  --app-prefix, -a    Application prefix used in the CDN url [string] [required]
   --key-filename, -k  JSON key file used to authenticate with Google Cloud
                       Platform.
-                      If not set, the credentials option is used.
+                      If not set, the credentials option is used.       [string]
   --credentials, -c   Stringified version of the JSON key file used to
                       authenticate with Google Cloud Platform.
                       Can also be set as CDN_UPLOADER_CREDENTIALS environment
-                      variable
+                      variable                                          [string]
   --bucket-name, -b   Google Cloud Storage bucket to use.
-                                                       [default: "fiaas-assets"]
-  --project-id, -p    Google Cloud Storage projectId.     [default: "fiaas-gke"]
+                                              [string] [default: "fiaas-assets"]
+  --project-id, -p    Google Cloud Storage projectId.
+                                                 [string] [default: "fiaas-gke"]
   --cache-control     Override the cache-control header for the assets
-                                             [default: "public, max-age=108000"]
+                                    [string] [default: "public, max-age=108000"]
+  --help, -h, -?      Show help                                        [boolean]
+  --version, -v       Show version number                              [boolean]
 ```
 
 All options can also be set as environment variables, using the `CDN_UPLOADER_` prefix. 

@@ -10,30 +10,36 @@ const argv = require('yargs')
         alias: 'a',
         describe: 'Application prefix used in the CDN url',
         demand: true,
+        type: 'string',
     })
     .option('key-filename', {
         alias: 'k',
         describe: `JSON key file used to authenticate with Google Cloud Platform.
         If not set, the credentials option is used.`,
+        type: 'string',
     })
     .option('credentials', {
         alias: 'c',
         describe: `Stringified version of the JSON key file used to authenticate with Google Cloud Platform.
         Can also be set as CDN_UPLOADER_CREDENTIALS environment variable`,
+        type: 'string',
     })
     .option('bucket-name', {
         alias: 'b',
         default: 'fiaas-assets',
         describe: 'Google Cloud Storage bucket to use.',
+        type: 'string',
     })
     .option('project-id', {
         alias: 'p',
         default: 'fiaas-gke',
         describe: 'Google Cloud Storage projectId.',
+        type: 'string',
     })
     .option('cache-control', {
         default: 'public, max-age=108000',
         describe: 'Override the cache-control header for the assets',
+        type: 'string',
     })
     .help()
     .version()
