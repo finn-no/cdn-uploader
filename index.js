@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-const uploader = require('./lib/uploader');
 const argv = require('yargs')
     .usage('$0 [options] <assetsFolder>')
     .demand(1)
@@ -46,6 +45,12 @@ const argv = require('yargs')
     .alias('help', ['h', '?'])
     .alias('version', 'v')
     .argv;
+
+const updateNotifier = require('update-notifier');
+const uploader = require('./lib/uploader');
+const pkg = require('./package.json');
+
+updateNotifier({ pkg }).notify();
 
 function loadCredentials (args) {
     if (args.keyFilename) {

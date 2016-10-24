@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "@google-cloud/storage": "^0.4.0",
+    "update-notifier": "^1.0.2",
     "yargs": "^6.3.0"
   },
   "devDependencies": {
