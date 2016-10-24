@@ -35,6 +35,10 @@ const argv = require('yargs')
         default: 'public, max-age=108000',
         describe: 'Override the cache-control header for the assets',
     })
+    .help()
+    .version()
+    .alias('help', ['h', '?'])
+    .alias('version', 'v')
     .argv;
 
 function loadCredentials (args) {
