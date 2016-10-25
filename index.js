@@ -79,5 +79,8 @@ const options = getOptions(argv);
 uploader.upload(options)
     .then(uploadedAssets => {
         console.log('---Uploaded assets---');
-        uploadedAssets.map(item => item.destination).forEach(s => console.log(s));
+        uploadedAssets
+            .map(item => item.destination)
+            .map(dest => `https://storage.googleapis.com/${argv.bucketName}/${dest}`)
+            .forEach(s => console.log(s));
     });
