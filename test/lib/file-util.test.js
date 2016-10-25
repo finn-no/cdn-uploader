@@ -40,3 +40,12 @@ test('should include all actual files', t => {
     t.deepEqual(files[0].name, 'test.txt');
     t.deepEqual(files[0].path, file1);
 });
+
+test('makeAbsolute', t => {
+    const cwd = process.cwd();
+
+    t.true(fileUtil.makeAbsolute() === cwd);
+    t.true(fileUtil.makeAbsolute('./some-path') === `${cwd}/some-path`);
+    t.true(fileUtil.makeAbsolute('/some-path') === '/some-path');
+    t.true(fileUtil.makeAbsolute('some-path') === `${cwd}/some-path`);
+});
