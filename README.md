@@ -5,8 +5,15 @@
 
 ## Requirements
 You must either specify key-filename or specify credentials which is a
-`JSON.stringify` version of the JSON based keyfile containing credentials 
+base64 encoded `JSON.stringify` version of the JSON based keyfile containing credentials 
 used when talking to Google Cloud Storage (GCS).
+
+```javascript
+//base 64 encoded keyfile
+const credentials = require('keyfile.json');
+const credentialString = JSON.stringify(credentials);
+return new Buffer(credentialString).toString('base64');
+```
 
 ## Usage
 
@@ -34,8 +41,8 @@ Options:
   --key-filename, -k  JSON key file used to authenticate with Google Cloud
                       Platform.
                       If not set, the credentials option is used.       [string]
-  --credentials, -c   Stringified version of the JSON key file used to
-                      authenticate with Google Cloud Platform.
+  --credentials, -c   Stringified and base64 encoded version of the JSON key
+                      file used to authenticate with Google Cloud Platform.
                       Can also be set as CDN_UPLOADER_CREDENTIALS environment
                       variable                                          [string]
   --bucket-name, -b   Google Cloud Storage bucket to use.

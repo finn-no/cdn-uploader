@@ -19,7 +19,7 @@ const argv = require('yargs')
     })
     .option('credentials', {
         alias: 'c',
-        describe: `Stringified version of the JSON key file used to authenticate with Google Cloud Platform.
+        describe: `Stringified and base64 encoded version of the JSON key file used to authenticate with Google Cloud Platform.
         Can also be set as CDN_UPLOADER_CREDENTIALS environment variable`,
         type: 'string',
     })
@@ -57,9 +57,9 @@ function loadCredentials (args) {
         return require(args.keyFilename);
     } else if (args.credentials) {
         try {
-            return JSON.parse(args.credentials.replace(/\\n/g, 'n'));
+            return JSON.parse(new Buffer(args.credentials, 'base64').toString('utf8'));
         } catch (err) {
-            console.error('Unable to parse credentials string');
+            console.error('Unable to parse credentials string', err);
             process.exit(1);
         }
     } else {
@@ -79,5 +79,5 @@ const options = getOptions(argv);
 uploader.upload(options)
     .then(uploadedAssets => {
         console.log('---Uploaded assets---');
-        uploadedAssets.map(item => item.destination).forEach(console.log);
+        uploadedAssets.map(item => item.destination).forEach(s => console.log(s));
     });
