@@ -40,6 +40,11 @@ const argv = require('yargs')
         describe: 'Override the cache-control header for the assets',
         type: 'string',
     })
+    .option('dry-run', {
+        alias: 'n',
+        describe: 'Print a list of which files would be uploaded',
+        type: 'boolean',
+    })
     .help()
     .version()
     .alias('help', ['h', '?'])
@@ -47,7 +52,7 @@ const argv = require('yargs')
     .argv;
 
 const updateNotifier = require('update-notifier');
-const uploader = require('./lib/uploader');
+const { upload, getAllAssetsToUpload } = require('./lib/uploader');
 const pkg = require('./package.json');
 
 updateNotifier({ pkg }).notify();
@@ -76,11 +81,28 @@ function getOptions (args) {
 
 const options = getOptions(argv);
 
-uploader.upload(options)
+const getGoogleUrl = dest => `https://storage.googleapis.com/${options.bucketName}/${dest}`;
+
+if (argv.dryRun) {
+    // Lazy load these deps
+    const { blue, yellow, green } = require('chalk');
+    const table = require('text-table');
+
+    const text = getAllAssetsToUpload(options)
+        .map(({ path, destination }) => ({ file: path, destination: getGoogleUrl(destination) }))
+        .map(({ file, destination }) => [blue(file), yellow('->'), green(destination)]);
+
+    console.log('---Files that would be uploaded---');
+    console.log(table(text));
+
+    return;
+}
+
+upload(options)
     .then(uploadedAssets => {
         console.log('---Uploaded assets---');
         uploadedAssets
             .map(item => item.destination)
-            .map(dest => `https://storage.googleapis.com/${argv.bucketName}/${dest}`)
+            .map(getGoogleUrl)
             .forEach(s => console.log(s));
     });
