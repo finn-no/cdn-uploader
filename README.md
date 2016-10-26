@@ -24,7 +24,7 @@ $ npm install cdn-uploader -g
 
 Actual usage:
 ```sh-session
-$ cdn-uploader /tmp/cdn-assets -a finnlet-server
+$ cdn-uploader /tmp/cdn-assets -a test-app
 -- Uploaded assets --
 test-app/example.jpg
 test-app/css/SDFSDF.finn.css
@@ -64,7 +64,7 @@ All files or folder beginning with a "." is automatically excluded (e.g. `.gitig
 ### Advanced
 You may also override other options if you like (handy for testing)
 
-- `--key-filename` - JSON key file used to authenticate with GCP. If not set FINN_CDN_UPLOADER_CREDENTIALS environment variable is used.
+- `--key-filename` - JSON key file used to authenticate with GCP. If not set CDN_UPLOADER_CREDENTIALS environment variable is used.
 - `--bucket-name` - GCS bucket to use.
 - `--project-id` - GCS projectId.
 
