@@ -51,6 +51,7 @@ Options:
                                                  [string] [default: "fiaas-gke"]
   --cache-control     Override the cache-control header for the assets
                                     [string] [default: "public, max-age=108000"]
+  --dry-run, -n       Print a list of which files would be uploaded    [boolean]
   --help, -h, -?      Show help                                        [boolean]
   --version, -v       Show version number                              [boolean]
 ```
