@@ -57,12 +57,14 @@ const pkg = require('./package.json');
 
 updateNotifier({ pkg }).notify();
 
-function loadCredentials (args) {
-    if (args.keyFilename) {
-        return require(args.keyFilename);
-    } else if (args.credentials) {
+const options = Object.assign({}, argv, { assetsFolder: argv._[0] });
+
+function loadCredentials () {
+    if (options.keyFilename) {
+        return require(options.keyFilename);
+    } else if (options.credentials) {
         try {
-            return JSON.parse(new Buffer(args.credentials, 'base64').toString('utf8'));
+            return JSON.parse(new Buffer(options.credentials, 'base64').toString('utf8'));
         } catch (err) {
             console.error('Unable to parse credentials string', err);
             process.exit(1);
@@ -73,17 +75,9 @@ function loadCredentials (args) {
     }
 }
 
-function getOptions (args) {
-    const credentials = loadCredentials(args);
-    const assetsFolder = args._[0];
-    return Object.assign({}, args, { credentials, assetsFolder });
-}
-
-const options = getOptions(argv);
-
 const getGoogleUrl = dest => `https://storage.googleapis.com/${options.bucketName}/${dest}`;
 
-if (argv.dryRun) {
+if (options.dryRun) {
     // Lazy load these deps
     const { blue, yellow, green } = require('chalk');
     const table = require('text-table');
@@ -98,7 +92,8 @@ if (argv.dryRun) {
     return;
 }
 
-upload(options)
+// Avoid loading credentials if we're in a dry-run
+upload(Object.assign({ options }, { credentials: loadCredentials() }))
     .then(uploadedAssets => {
         console.log('---Uploaded assets---');
         uploadedAssets
