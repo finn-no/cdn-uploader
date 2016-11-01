@@ -93,7 +93,7 @@ if (options.dryRun) {
 }
 
 // Avoid loading credentials if we're in a dry-run
-upload(Object.assign({ options }, { credentials: loadCredentials() }))
+upload(Object.assign(options, { credentials: loadCredentials() }))
     .then(uploadedAssets => {
         console.log('---Uploaded assets---');
         uploadedAssets
