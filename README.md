@@ -83,4 +83,4 @@ This is again exposed by our CDN at:
 
 ## Cache time?
 All files uploaded to CDN is configured with `Cache-Control: public, max-age=108000`,
-meaning all your assets will be cached in 30 days.
+meaning all your assets will be cached in 1.25 days.
