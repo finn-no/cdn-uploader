@@ -2,6 +2,6 @@
     "extends": "plugin:ava/recommended",
     "plugins": ["ava"],
     "rules": {
-        "ava/prefer-power-assert": 2
+        "ava/prefer-power-assert": "error"
     }
 }
