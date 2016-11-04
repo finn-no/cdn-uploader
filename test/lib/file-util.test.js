@@ -12,11 +12,14 @@ const writeFile = pify(fs.writeFile);
 
 const workPath = path.join(os.tmpdir(), 'cdn-test');
 const file1 = path.join(workPath, 'test.txt');
+const nested = path.join(workPath, 'nested');
+const file2 = path.join(nested, 'test.txt');
 const ignoredFile = path.join(workPath, '.ignore.txt');
 
-test.before(() => mkdirpP(workPath)
+test.before(() => mkdirpP(nested)
     .then(() => Promise.all([
         writeFile(file1, 'woop'),
+        writeFile(file2, 'woop'),
         writeFile(ignoredFile, ''),
     ]))
 );
@@ -25,9 +28,11 @@ test.after.always(() => del(workPath, { force: true }));
 
 test('should include all actual files', t => {
     const files = fileUtil.getFilesToUpload(workPath);
-    t.true(files.length === 1);
+    t.true(files.length === 2);
     t.true(files[0].name === 'test.txt');
-    t.true(files[0].path === file1);
+    t.true(files[0].path === file2);
+    t.true(files[1].name === 'test.txt');
+    t.true(files[1].path === file1);
 });
 
 test('makeAbsolute', t => {
