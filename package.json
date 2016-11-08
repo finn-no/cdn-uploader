@@ -10,7 +10,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "ava",
-    "travis": "npm run lint && npm run test"
+    "travis": "npm run lint && npm run test && npm run travis:e2e",
+    "travis:e2e": "node index -p cookies-kpi -b ivar-supertest -a e2e-test test/content"
   },
   "repository": "finn-no/cdn-uploader",
   "keywords": [
