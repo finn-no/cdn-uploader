@@ -50,7 +50,7 @@ Options:
   --project-id, -p    Google Cloud Storage projectId.
                                                  [string] [default: "fiaas-gke"]
   --cache-control     Override the cache-control header for the assets
-                                    [string] [default: "public, max-age=108000"]
+                                    [string] [default: "public, max-age=2592000"]
   --dry-run, -n       Print a list of which files would be uploaded    [boolean]
   --help, -h, -?      Show help                                        [boolean]
   --version, -v       Show version number                              [boolean]
@@ -82,5 +82,5 @@ This is again exposed by our CDN at:
 
 
 ## Cache time?
-All files uploaded to CDN is configured with `Cache-Control: public, max-age=108000`,
+All files uploaded to CDN is configured with `Cache-Control: public, max-age=2592000`,
 meaning all your assets will be cached in 30 days.

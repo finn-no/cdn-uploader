@@ -36,7 +36,7 @@ const argv = require('yargs')
         type: 'string',
     })
     .option('cache-control', {
-        default: 'public, max-age=108000',
+        default: 'public, max-age=2592000',
         describe: 'Override the cache-control header for the assets',
         type: 'string',
     })
