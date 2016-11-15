@@ -19,7 +19,7 @@ return new Buffer(credentialString).toString('base64');
 
 Install:
 ```sh-session
-$ npm install cdn-uploader -g
+$ npm install @finn-no/cdn-uploader -g
 ```
 
 Actual usage:
