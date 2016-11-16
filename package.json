@@ -41,6 +41,6 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "@finn-no:registry": "https://registry.npmjs.org/"
   }
 }
