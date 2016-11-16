@@ -5,7 +5,7 @@
 
 ## Requirements
 You must either specify key-filename or specify credentials which is a
-base64 encoded `JSON.stringify` version of the JSON based keyfile containing credentials 
+base64 encoded `JSON.stringify` version of the JSON based keyfile containing credentials
 used when talking to Google Cloud Storage (GCS).
 
 ```javascript
@@ -50,13 +50,14 @@ Options:
   --project-id, -p    Google Cloud Storage projectId.
                                                  [string] [default: "fiaas-gke"]
   --cache-control     Override the cache-control header for the assets
-                                    [string] [default: "public, max-age=2592000"]
+                                   [string] [default: "public, max-age=2592000"]
+  --flatten, -f       Flatten filestructure           [boolean] [default: false]
   --dry-run, -n       Print a list of which files would be uploaded    [boolean]
   --help, -h, -?      Show help                                        [boolean]
   --version, -v       Show version number                              [boolean]
 ```
 
-All options can also be set as environment variables, using the `CDN_UPLOADER_` prefix. 
+All options can also be set as environment variables, using the `CDN_UPLOADER_` prefix.
 E.g.: `CDN_UPLOADER_APP_PREFIX`, `CDN_UPLOADER_CREDENTIALS`, etc.
 
 ### Excluded files

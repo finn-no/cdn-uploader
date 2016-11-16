@@ -40,6 +40,12 @@ const argv = require('yargs')
         describe: 'Override the cache-control header for the assets',
         type: 'string',
     })
+    .option('flatten', {
+        alias: 'f',
+        describe: 'Flatten filestructure',
+        default: false,
+        type: 'boolean',
+    })
     .option('dry-run', {
         alias: 'n',
         describe: 'Print a list of which files would be uploaded',
