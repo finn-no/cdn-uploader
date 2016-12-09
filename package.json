@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "precreate-executable": "del cdn-uploader-*.nar",
-    "create-executable": "nar create --executable --os linux --arch x64 --node 6.9.2",
+    "create-executable": "nar create --executable --os linux --arch x64 --node 6.9.2 --file cdn-uploader.nar",
     "lint": "eslint .",
     "test": "ava",
     "travis": "npm run lint && npm run test && npm run travis:e2e && npm run create-executable",
