@@ -8,6 +8,8 @@
     "lib/"
   ],
   "scripts": {
+    "precreate-executable": "del cdn-uploader-*.nar",
+    "create-executable": "nar create --executable --os linux --arch x64 --node 6.9.2",
     "lint": "eslint .",
     "test": "ava",
     "travis": "npm run lint && npm run test && npm run travis:e2e",
@@ -33,14 +35,24 @@
   "devDependencies": {
     "ava": "^0.17.0",
     "del": "^2.2.2",
+    "del-cli": "^0.2.1",
     "eslint": "^3.8.1",
     "eslint-config-finn": "^1.0.0-beta.1",
     "eslint-plugin-ava": "^4.0.0",
     "mkdirp": "^0.5.1",
+    "nar": "^0.3.40",
     "pify": "^2.3.0"
   },
   "publishConfig": {
     "access": "public",
     "@finn-no:registry": "https://registry.npmjs.org/"
+  },
+  "archive": {
+    "binary": true,
+    "patterns": [
+      "index.js",
+      "lib/**",
+      "package.json"
+    ]
   }
 }
