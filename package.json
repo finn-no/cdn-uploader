@@ -42,7 +42,7 @@
     "eslint-plugin-ava": "^4.0.1",
     "mkdirp": "^0.5.1",
     "nar": "^0.3.40",
-    "pify": "^2.3.0"
+    "pify": "^3.0.0"
   },
   "publishConfig": {
     "access": "public",
