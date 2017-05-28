@@ -7,7 +7,7 @@ import fileUtil from '../../lib/file-util.js';
 const workPath = path.join(os.tmpdir(), 'cdn-test');
 const file1 = path.join(workPath, 'test.txt');
 const nested = path.join(workPath, 'nested');
-const file2 = path.join(nested, 'test.txt');
+const file2 = path.join(nested, 'test.js');
 const ignoredFile = path.join(workPath, '.ignore.txt');
 
 test.before(async () => {
@@ -22,40 +22,32 @@ test.before(async () => {
 
 test.after.always(() => fs.remove(workPath));
 
-test('should be a directory', t => {
-    t.true(fileUtil.isDirectory(workPath));
-});
-
-test('file should not be a directory', t => {
-    t.true(!fileUtil.isDirectory(file1));
-});
-
-test('unkown folder should not be a directory', t => {
-    const folder = path.join(os.tmpdir(), '/random-blob-here');
-    t.true(!fileUtil.isDirectory(folder));
-});
-
-test('should include all actual files', t => {
-    const files = fileUtil.getFilesToUpload(workPath);
+test('should include all actual files', async t => {
+    const files = await fileUtil.getFilesToUpload(
+        { cwd: workPath, flatten: false },
+        workPath
+    );
     t.deepEqual(files, [
-        { name: 'nested/test.txt', path: file2 },
+        { name: 'nested/test.js', path: file2 },
         { name: 'test.txt', path: file1 },
     ]);
 });
 
-test('should flatten and include all actual files', t => {
-    const files = fileUtil.getFilesToUpload(workPath, true);
+test('should flatten and include all actual files', async t => {
+    const files = await fileUtil.getFilesToUpload(
+        { cwd: workPath, flatten: true },
+        workPath
+    );
     t.deepEqual(files, [
-        { name: 'test.txt', path: file2 },
+        { name: 'test.js', path: file2 },
         { name: 'test.txt', path: file1 },
     ]);
 });
 
-test('makeAbsolute', t => {
-    const cwd = process.cwd();
-
-    t.true(fileUtil.makeAbsolute() === cwd);
-    t.true(fileUtil.makeAbsolute('./some-path') === `${cwd}/some-path`);
-    t.true(fileUtil.makeAbsolute('/some-path') === '/some-path');
-    t.true(fileUtil.makeAbsolute('some-path') === `${cwd}/some-path`);
+test('should include all actual files matching pattern', async t => {
+    const files = await fileUtil.getFilesToUpload(
+        { cwd: workPath, flatten: false },
+        `${workPath}/**/*.js`
+    );
+    t.deepEqual(files, [{ name: 'nested/test.js', path: file2 }]);
 });

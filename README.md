@@ -29,7 +29,13 @@ $ npm install @finn-no/cdn-uploader -g
 Actual usage:
 
 ```sh-session
-$ cdn-uploader /tmp/cdn-assets -a test-app
+$ cdn-uploader /tmp/cdn-assets --cwd /tmp/cdn-assets -a test-app
+-- Uploaded assets --
+test-app/example.jpg
+test-app/css/SDFSDF.finn.css
+test-app/js/SDFSDF.finn.js
+
+$ cdn-uploader cdn-assets -a test-app
 -- Uploaded assets --
 test-app/example.jpg
 test-app/css/SDFSDF.finn.css
@@ -57,14 +63,26 @@ Options:
                                                  [string] [default: "fiaas-gke"]
   --cache-control     Override the cache-control header for the assets
                                    [string] [default: "public, max-age=2592000"]
-  --flatten, -f       Flatten filestructure           [boolean] [default: false]
+  --flatten, -f       Flatten file structure          [boolean] [default: false]
   --dry-run, -n       Print a list of which files would be uploaded    [boolean]
+  --cwd               The base from which files are resolved
+                                             [string] [default: "process.cwd()"]
   --help, -h, -?      Show help                                        [boolean]
   --version, -v       Show version number                              [boolean]
 ```
 
 All options can also be set as environment variables, using the `CDN_UPLOADER_`
 prefix. E.g.: `CDN_UPLOADER_APP_PREFIX`, `CDN_UPLOADER_CREDENTIALS`, etc.
+
+### Pattern
+
+You can pass in a pattern. E.g. to only upload javascript files:
+
+```sh-session
+$ cdn-uploader '/tmp/cdn-assets/**/*.js' -a test-app
+-- Uploaded assets --
+test-app/js/SDFSDF.finn.js
+```
 
 ### Excluded files
 
