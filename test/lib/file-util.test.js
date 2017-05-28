@@ -37,20 +37,18 @@ test('unkown folder should not be a directory', t => {
 
 test('should include all actual files', t => {
     const files = fileUtil.getFilesToUpload(workPath);
-    t.true(files.length === 2);
-    t.true(files[0].name === 'nested/test.txt');
-    t.true(files[0].path === file2);
-    t.true(files[1].name === 'test.txt');
-    t.true(files[1].path === file1);
+    t.deepEqual(files, [
+        { name: 'nested/test.txt', path: file2 },
+        { name: 'test.txt', path: file1 },
+    ]);
 });
 
 test('should flatten and include all actual files', t => {
     const files = fileUtil.getFilesToUpload(workPath, true);
-    t.true(files.length === 2);
-    t.true(files[0].name === 'test.txt');
-    t.true(files[0].path === file2);
-    t.true(files[1].name === 'test.txt');
-    t.true(files[1].path === file1);
+    t.deepEqual(files, [
+        { name: 'test.txt', path: file2 },
+        { name: 'test.txt', path: file1 },
+    ]);
 });
 
 test('makeAbsolute', t => {
