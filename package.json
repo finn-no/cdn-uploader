@@ -8,14 +8,13 @@
     "lib/"
   ],
   "scripts": {
-    "precreate-executable": "rimraf @finn-no/",
+    "precreate-executable": "rimraf cdn-uploader-*",
     "create-executable": "pkg --targets node6-linux-x64,node6-macos-x64,node6-win-x64 .",
-    "postcreate-executable": "rimraf @finn-no/cdn-uploader",
     "lint": "eslint .",
     "test": "ava",
     "travis": "npm run lint && npm run test && npm run travis:e2e && npm run create-executable && npm run travis:e2e-executable",
     "travis:e2e": "./index.js -p cookies-kpi -b ivar-supertest -a e2e-test test/content",
-    "travis:e2e-executable": "@finn-no/cdn-uploader-linux -p cookies-kpi -b ivar-supertest -a e2e-test test/content"
+    "travis:e2e-executable": "cdn-uploader-linux -p cookies-kpi -b ivar-supertest -a e2e-test test/content"
   },
   "repository": "finn-no/cdn-uploader",
   "keywords": [
