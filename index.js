@@ -54,8 +54,7 @@ const argv = require('yargs')
     .help()
     .version()
     .alias('help', ['h', '?'])
-    .alias('version', 'v')
-    .argv;
+    .alias('version', 'v').argv;
 
 const updateNotifier = require('update-notifier');
 const { upload, getAllAssetsToUpload } = require('./lib/uploader');
@@ -65,23 +64,28 @@ updateNotifier({ pkg }).notify();
 
 const options = Object.assign({}, argv, { assetsFolder: argv._[0] });
 
-function loadCredentials () {
+function loadCredentials() {
     if (options.keyFilename) {
         return require(options.keyFilename);
     } else if (options.credentials) {
         try {
-            return JSON.parse(new Buffer(options.credentials, 'base64').toString('utf8'));
+            return JSON.parse(
+                new Buffer(options.credentials, 'base64').toString('utf8')
+            );
         } catch (err) {
             console.error('Unable to parse credentials string', err);
             process.exit(1);
         }
     } else {
-        console.error('You must either specify the key-filename or the credentials string to authenticate with Google Cloud Platform');
+        console.error(
+            'You must either specify the key-filename or the credentials string to authenticate with Google Cloud Platform'
+        );
         process.exit(1);
     }
 }
 
-const getGoogleUrl = dest => `https://storage.googleapis.com/${options.bucketName}/${dest}`;
+const getGoogleUrl = dest =>
+    `https://storage.googleapis.com/${options.bucketName}/${dest}`;
 
 if (options.dryRun) {
     // Lazy load these deps
@@ -89,8 +93,15 @@ if (options.dryRun) {
     const table = require('text-table');
 
     const text = getAllAssetsToUpload(options)
-        .map(({ path, destination }) => ({ file: path, destination: getGoogleUrl(destination) }))
-        .map(({ file, destination }) => [blue(file), yellow('->'), green(destination)]);
+        .map(({ path, destination }) => ({
+            file: path,
+            destination: getGoogleUrl(destination),
+        }))
+        .map(({ file, destination }) => [
+            blue(file),
+            yellow('->'),
+            green(destination),
+        ]);
 
     console.log('---Files that would be uploaded---');
     console.log(table(text));
@@ -99,11 +110,12 @@ if (options.dryRun) {
 }
 
 // Avoid loading credentials if we're in a dry-run
-upload(Object.assign(options, { credentials: loadCredentials() }))
-    .then(uploadedAssets => {
+upload(Object.assign(options, { credentials: loadCredentials() })).then(
+    uploadedAssets => {
         console.log('---Uploaded assets---');
         uploadedAssets
             .map(item => item.destination)
             .map(getGoogleUrl)
             .forEach(s => console.log(s));
-    });
+    }
+);

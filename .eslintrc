@@ -2,6 +2,7 @@
   "root": true,
   "extends": [
     "finn",
-    "finn/node"
+    "finn/node",
+    "finn-prettier"
   ]
 }

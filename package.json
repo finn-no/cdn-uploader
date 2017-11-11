@@ -1,57 +1,74 @@
 {
-  "name": "@finn-no/cdn-uploader",
-  "version": "3.1.4",
-  "description": "Small tool uploading assets to CDN backend (Google Cloud Storage)",
-  "main": "index.js",
-  "files": [
-    "index.js",
-    "lib/"
-  ],
-  "scripts": {
-    "precreate-executable": "rimraf cdn-uploader-*",
-    "create-executable": "pkg --targets node6-linux-x64,node6-macos-x64,node6-win-x64 .",
-    "lint": "eslint .",
-    "test": "ava",
-    "travis": "npm run lint && npm run test && npm run travis:e2e && npm run create-executable && npm run travis:e2e-executable",
-    "travis:e2e": "./index.js -p cookies-kpi -b ivar-supertest -a e2e-test test/content",
-    "travis:e2e-executable": "./cdn-uploader-linux -p cookies-kpi -b ivar-supertest -a e2e-test test/content"
-  },
-  "repository": "finn-no/cdn-uploader",
-  "keywords": [
-    "CDN",
-    "upload",
-    "assets"
-  ],
-  "author": "FINN.no <npm@finn.no>",
-  "bin": "./index.js",
-  "license": "MIT",
-  "dependencies": {
-    "@google-cloud/storage": "^1.1.0",
-    "chalk": "^2.3.0",
-    "fs-readdir-recursive": "^1.0.0",
-    "text-table": "^0.2.0",
-    "update-notifier": "^2.0.0",
-    "yargs": "^10.0.3"
-  },
-  "devDependencies": {
-    "ava": "^0.23.0",
-    "eslint": "^4.11.0",
-    "eslint-config-finn": "^3.0.0",
-    "eslint-plugin-ava": "^4.0.1",
-    "fs-extra": "^4.0.2",
-    "pkg": "^4.0.0",
-    "rimraf": "^2.6.1"
-  },
-  "publishConfig": {
-    "access": "public",
-    "@finn-no:registry": "https://registry.npmjs.org/"
-  },
-  "archive": {
-    "binary": true,
-    "patterns": [
-      "index.js",
-      "lib/**",
-      "package.json"
-    ]
-  }
+    "name": "@finn-no/cdn-uploader",
+    "version": "3.1.4",
+    "description":
+        "Small tool uploading assets to CDN backend (Google Cloud Storage)",
+    "main": "index.js",
+    "files": ["index.js", "lib/"],
+    "scripts": {
+        "precreate-executable": "rimraf cdn-uploader-*",
+        "create-executable":
+            "pkg --targets node6-linux-x64,node6-macos-x64,node6-win-x64 .",
+        "lint": "eslint .",
+        "test": "ava",
+        "travis":
+            "npm run lint && npm run test && npm run travis:e2e && npm run create-executable && npm run travis:e2e-executable",
+        "travis:e2e":
+            "./index.js -p cookies-kpi -b ivar-supertest -a e2e-test test/content",
+        "travis:e2e-executable":
+            "./cdn-uploader-linux -p cookies-kpi -b ivar-supertest -a e2e-test test/content",
+        "precommit": "lint-staged"
+    },
+    "repository": "finn-no/cdn-uploader",
+    "keywords": ["CDN", "upload", "assets"],
+    "author": "FINN.no <npm@finn.no>",
+    "bin": "./index.js",
+    "license": "MIT",
+    "dependencies": {
+        "@google-cloud/storage": "^1.1.0",
+        "chalk": "^2.3.0",
+        "fs-readdir-recursive": "^1.0.0",
+        "text-table": "^0.2.0",
+        "update-notifier": "^2.0.0",
+        "yargs": "^10.0.3"
+    },
+    "devDependencies": {
+        "ava": "^0.23.0",
+        "eslint": "^4.11.0",
+        "eslint-config-finn": "^3.0.0",
+        "eslint-config-finn-prettier": "^3.0.1",
+        "eslint-plugin-ava": "^4.0.1",
+        "fs-extra": "^4.0.2",
+        "husky": "^0.14.3",
+        "lint-staged": "^5.0.0",
+        "pkg": "^4.0.0",
+        "prettier": "^1.8.2",
+        "rimraf": "^2.6.1"
+    },
+    "publishConfig": {
+        "access": "public",
+        "@finn-no:registry": "https://registry.npmjs.org/"
+    },
+    "archive": {
+        "binary": true,
+        "patterns": ["index.js", "lib/**", "package.json"]
+    },
+    "lint-staged": {
+        "*.js": ["eslint --fix", "git add"],
+        "*.{md,json}": ["prettier --write", "git add"],
+        ".eslintrc": ["prettier --write", "git add"]
+    },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5",
+        "overrides": [
+            {
+                "files": ".eslintrc",
+                "options": {
+                    "parser": "json"
+                }
+            }
+        ]
+    }
 }
