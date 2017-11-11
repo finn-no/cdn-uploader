@@ -1,7 +1,9 @@
 # cdn-uploader
+
 > Small tool uploading assets to CDN backend (Google Cloud Storage)
 
 [![Build Status](https://travis-ci.org/finn-no/cdn-uploader.svg?branch=master)](https://travis-ci.org/finn-no/cdn-uploader)
+[![Greenkeeper badge](https://badges.greenkeeper.io/finn-no/cdn-uploader.svg)](https://greenkeeper.io/)
 
 ## Requirements
 You must either specify key-filename or specify credentials which is a
