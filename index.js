@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
+const { posix: { join } } = require('path');
 const argv = require('yargs')
-    .usage('$0 [options] <assetsFolder>')
+    .usage('$0 [options] <assets>')
     .demand(1)
     .env('CDN_UPLOADER')
     .option('app-prefix', {
@@ -42,7 +43,7 @@ const argv = require('yargs')
     })
     .option('flatten', {
         alias: 'f',
-        describe: 'Flatten filestructure',
+        describe: 'Flatten file structure',
         default: false,
         type: 'boolean',
     })
@@ -50,6 +51,11 @@ const argv = require('yargs')
         alias: 'n',
         describe: 'Print a list of which files would be uploaded',
         type: 'boolean',
+    })
+    .option('cwd', {
+        describe: 'The base from which files are resolved',
+        default: process.cwd(),
+        type: 'string',
     })
     .help()
     .version()
@@ -62,7 +68,7 @@ const pkg = require('./package.json');
 
 updateNotifier({ pkg }).notify();
 
-const options = Object.assign({}, argv, { assetsFolder: argv._[0] });
+const options = Object.assign({}, argv, { assets: argv._ });
 
 function loadCredentials() {
     if (options.keyFilename) {
@@ -85,37 +91,48 @@ function loadCredentials() {
 }
 
 const getGoogleUrl = dest =>
-    `https://storage.googleapis.com/${options.bucketName}/${dest}`;
+    join('https://storage.googleapis.com', options.bucketName, dest);
 
 if (options.dryRun) {
     // Lazy load these deps
     const { blue, yellow, green } = require('chalk');
     const table = require('text-table');
 
-    const text = getAllAssetsToUpload(options)
-        .map(({ path, destination }) => ({
-            file: path,
-            destination: getGoogleUrl(destination),
-        }))
-        .map(({ file, destination }) => [
-            blue(file),
-            yellow('->'),
-            green(destination),
-        ]);
+    return getAllAssetsToUpload(options)
+        .then(res =>
+            res
+                .map(({ path, destination }) => ({
+                    file: path,
+                    destination: getGoogleUrl(destination),
+                }))
+                .map(({ file, destination }) => [
+                    blue(file),
+                    yellow('->'),
+                    green(destination),
+                ])
+        )
+        .then(text => {
+            console.log('---Files that would be uploaded---');
+            console.log(table(text));
+        })
+        .catch(e => {
+            console.error(e);
 
-    console.log('---Files that would be uploaded---');
-    console.log(table(text));
-
-    return;
+            process.exit(1);
+        });
 }
 
 // Avoid loading credentials if we're in a dry-run
-upload(Object.assign(options, { credentials: loadCredentials() })).then(
-    uploadedAssets => {
+upload(Object.assign(options, { credentials: loadCredentials() }))
+    .then(uploadedAssets => {
         console.log('---Uploaded assets---');
         uploadedAssets
             .map(item => item.destination)
             .map(getGoogleUrl)
             .forEach(s => console.log(s));
-    }
-);
+    })
+    .catch(e => {
+        console.error(e);
+
+        process.exit(1);
+    });
