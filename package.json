@@ -59,6 +59,7 @@
         ".eslintrc": ["prettier --write", "git add"]
     },
     "prettier": {
+        "proseWrap": "always",
         "singleQuote": true,
         "tabWidth": 4,
         "trailingComma": "es5",
