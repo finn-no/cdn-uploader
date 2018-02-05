@@ -27,7 +27,7 @@
     "dependencies": {
         "@google-cloud/storage": "^1.1.0",
         "chalk": "^2.3.0",
-        "globby": "^6.1.0",
+        "globby": "^7.1.1",
         "text-table": "^0.2.0",
         "update-notifier": "^2.0.0",
         "yargs": "^11.0.0"
