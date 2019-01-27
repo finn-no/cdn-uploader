@@ -1,34 +1,35 @@
 language: node_js
 node_js:
-- 8
-- 6
-- stable
+    - 10
+    - 8
+    - 6
+    - stable
 before_install: yarn global add greenkeeper-lockfile@1
 before_script: greenkeeper-lockfile-update
 script: yarn run travis
 after_script: greenkeeper-lockfile-upload
 cache:
-  yarn: true
-  directories:
-  - "$HOME/.pkg-cache"
+    yarn: true
+    directories:
+        - '$HOME/.pkg-cache'
 env:
-  matrix:
-  - CXX=g++-4.8
-  global:
-    secure: PpTlQQ99Z04msSnCnjBytzyYkSXetC+api8lr9rv7vla28ctO95U7uZyHaXiU/K4gaMojJBLDDfyXp6wcClLWOggEsCsZIsLtvK34lnU/zfEMsKEmoqkavDErUu5defgYnvBYLDrqIVlSX3nKVjzrMcznfnmThwJI1qL3r42LE0pRnDNnzLPSnkUydCTrblRXI5opi8mmbYw37bOXHgMCBxmBRS7NCkkRQdosBq+YrHv+oci3FNgc5FM1BdKr7OpZACYQDbVrgsxMYgYiykIr2DuHXsxErv50g087Qa/gK8WJ0F6jzLAcINUUr5TonwAjc8JCXZeSRsbq/nsF7ui7a+aUiwMaeyMlS7U4DYBFm6E82o68zc4qJg90roS31RWV51/CMK+MD2s2OJjA9Hr04xizjJ8O2zS/eIAy01N8EB26mMRYclAHrk4f7AmZ3orBVoOY5Q8QHrMOg72QgaBS4Z05GMqk29/G/e/FApGK3pAP2EziqLmiEKz7QVjZa6DGscNSsyoUqwPPmb4MulcziaJhhpgPAsTPfKuCWb/NzfmnUajUdC33ep7NN6bb+tF9GN0i0+WiaBVb0ssdfyDGJLFMNd7JYEDaqlo+lbr+EMWKwKJi8A2Ism1CB77cfWG6Rh0KjCmnlqR0spcOYhxa6PwRu/pQUoZUqEKV4DBnx4=
+    matrix:
+        - CXX=g++-4.8
+    global:
+        secure: PpTlQQ99Z04msSnCnjBytzyYkSXetC+api8lr9rv7vla28ctO95U7uZyHaXiU/K4gaMojJBLDDfyXp6wcClLWOggEsCsZIsLtvK34lnU/zfEMsKEmoqkavDErUu5defgYnvBYLDrqIVlSX3nKVjzrMcznfnmThwJI1qL3r42LE0pRnDNnzLPSnkUydCTrblRXI5opi8mmbYw37bOXHgMCBxmBRS7NCkkRQdosBq+YrHv+oci3FNgc5FM1BdKr7OpZACYQDbVrgsxMYgYiykIr2DuHXsxErv50g087Qa/gK8WJ0F6jzLAcINUUr5TonwAjc8JCXZeSRsbq/nsF7ui7a+aUiwMaeyMlS7U4DYBFm6E82o68zc4qJg90roS31RWV51/CMK+MD2s2OJjA9Hr04xizjJ8O2zS/eIAy01N8EB26mMRYclAHrk4f7AmZ3orBVoOY5Q8QHrMOg72QgaBS4Z05GMqk29/G/e/FApGK3pAP2EziqLmiEKz7QVjZa6DGscNSsyoUqwPPmb4MulcziaJhhpgPAsTPfKuCWb/NzfmnUajUdC33ep7NN6bb+tF9GN0i0+WiaBVb0ssdfyDGJLFMNd7JYEDaqlo+lbr+EMWKwKJi8A2Ism1CB77cfWG6Rh0KjCmnlqR0spcOYhxa6PwRu/pQUoZUqEKV4DBnx4=
 addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - g++-4.8
 deploy:
-  provider: releases
-  api_key:
-    secure: Z2QwMzGV8NuhX1Ctt7MEc5TCloo0gv22CEGarIFVZUUwocGZ5sqs3EgpHwa04qezo4UfoGBGuRpsuBA+MMX6/TD1E9fYJp9O2g/yRSOtW2AVPwKU1Ue3tIXVZm4mqAc6EKDiuYviDQlwHGbYMs2HW8wngiPg2Zv8glVRKKOypwcOFnbfmOZmsbkWZ32a0+SSDUanq3raQ50HEYiyCBGfr7+XRizy37y8b5pu3a/euyOE1SxnDcbofcAbmVMBSh8k67etQfTccdOzkyuR2IusFoFgY1kW1CWztqjdvutelkmVMcExij9isXi6BvSRWQ+qss6xjZvzKNVdIQ5gWOyb2+QZ5VjnXrAckZYA9eS2f8kGepnhk7nVE54ya61rPwVdS9qg6mCD99vE+rBKxaPSPht50P4LfqKg2M8N1mc4ghC80H6cvc20rmmtpNIe08ADh1lT8eNAA1XnNxU7tQXZwpVAqrURIDmLbsVwGRoWfF4+Ah+DT4onLp5PhwDhVZ4F5jUchTjuInRnAcTk8l2IUffwv8TTFOC5nqFTg2vG/pMH/BG1PpoB8fI2YnmQHygL3k528yXEHgLYMLuZTmQ3+pY9UrIBQCkNmr3ie7skTnTRZrCQqVJNPNssV2xpsgWtc+wYnzBqp2XTs7U87TIcSxD/4tQZb7IUZ8zA7dsIvy4=
-  file_glob: true
-  file: "cdn-uploader-*"
-  skip_cleanup: true
-  on:
-    repo: finn-no/cdn-uploader
-    tags: true
+    provider: releases
+    api_key:
+        secure: Z2QwMzGV8NuhX1Ctt7MEc5TCloo0gv22CEGarIFVZUUwocGZ5sqs3EgpHwa04qezo4UfoGBGuRpsuBA+MMX6/TD1E9fYJp9O2g/yRSOtW2AVPwKU1Ue3tIXVZm4mqAc6EKDiuYviDQlwHGbYMs2HW8wngiPg2Zv8glVRKKOypwcOFnbfmOZmsbkWZ32a0+SSDUanq3raQ50HEYiyCBGfr7+XRizy37y8b5pu3a/euyOE1SxnDcbofcAbmVMBSh8k67etQfTccdOzkyuR2IusFoFgY1kW1CWztqjdvutelkmVMcExij9isXi6BvSRWQ+qss6xjZvzKNVdIQ5gWOyb2+QZ5VjnXrAckZYA9eS2f8kGepnhk7nVE54ya61rPwVdS9qg6mCD99vE+rBKxaPSPht50P4LfqKg2M8N1mc4ghC80H6cvc20rmmtpNIe08ADh1lT8eNAA1XnNxU7tQXZwpVAqrURIDmLbsVwGRoWfF4+Ah+DT4onLp5PhwDhVZ4F5jUchTjuInRnAcTk8l2IUffwv8TTFOC5nqFTg2vG/pMH/BG1PpoB8fI2YnmQHygL3k528yXEHgLYMLuZTmQ3+pY9UrIBQCkNmr3ie7skTnTRZrCQqVJNPNssV2xpsgWtc+wYnzBqp2XTs7U87TIcSxD/4tQZb7IUZ8zA7dsIvy4=
+    file_glob: true
+    file: 'cdn-uploader-*'
+    skip_cleanup: true
+    on:
+        repo: finn-no/cdn-uploader
+        tags: true

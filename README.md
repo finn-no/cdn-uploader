@@ -75,10 +75,10 @@ All files or folder beginning with a "." is automatically excluded (e.g.
 
 You may also override other options if you like (handy for testing)
 
-* `--key-filename` - JSON key file used to authenticate with GCP. If not set
+- `--key-filename` - JSON key file used to authenticate with GCP. If not set
   CDN_UPLOADER_CREDENTIALS environment variable is used.
-* `--bucket-name` - GCS bucket to use.
-* `--project-id` - GCS projectId.
+- `--bucket-name` - GCS bucket to use.
+- `--project-id` - GCS projectId.
 
 You can also use environment variables for these options, just use the prefix
 `CDN_UPLOADER_`.
