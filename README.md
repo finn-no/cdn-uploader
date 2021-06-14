@@ -59,6 +59,8 @@ Options:
                                    [string] [default: "public, max-age=2592000"]
   --flatten, -f       Flatten filestructure           [boolean] [default: false]
   --dry-run, -n       Print a list of which files would be uploaded    [boolean]
+  --resumable, -r     Resumable upload                 [boolean] [default: true]
+  --validation, -V    Validation for upload            [boolean] [default: true]
   --help, -h, -?      Show help                                        [boolean]
   --version, -v       Show version number                              [boolean]
 ```
