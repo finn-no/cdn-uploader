@@ -1,8 +1,13 @@
 {
   "root": true,
   "extends": [
-    "finn",
-    "finn/node",
-    "finn-prettier"
-  ]
+    "airbnb-base", 
+    "prettier"
+  ],
+  "rules": {
+    "strict": [0, "global"],
+    "no-console": [0],
+    "global-require": [0],
+    "import/no-dynamic-require": [0]
+  }
 }

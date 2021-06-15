@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-'use strict';
 
-const argv = require('yargs')
+
+
+const {argv} = require('yargs')
     .usage('$0 [options] <assetsFolder>')
     .demand(1)
     .env('CDN_UPLOADER')
@@ -54,7 +55,7 @@ const argv = require('yargs')
     .help()
     .version()
     .alias('help', ['h', '?'])
-    .alias('version', 'v').argv;
+    .alias('version', 'v');
 
 const updateNotifier = require('update-notifier');
 const { upload, getAllAssetsToUpload } = require('./lib/uploader');
@@ -62,15 +63,15 @@ const pkg = require('./package.json');
 
 updateNotifier({ pkg }).notify();
 
-const options = Object.assign({}, argv, { assetsFolder: argv._[0] });
+const options = { ...argv, assetsFolder: argv._[0]};
 
 function loadCredentials() {
     if (options.keyFilename) {
         return require(options.keyFilename);
-    } else if (options.credentials) {
+    } if (options.credentials) {
         try {
             return JSON.parse(
-                new Buffer(options.credentials, 'base64').toString('utf8')
+                Buffer.from(options.credentials, 'base64').toString('utf8')
             );
         } catch (err) {
             console.error('Unable to parse credentials string', err);
@@ -82,6 +83,7 @@ function loadCredentials() {
         );
         process.exit(1);
     }
+    return '';
 }
 
 const getGoogleUrl = dest =>
@@ -106,16 +108,16 @@ if (options.dryRun) {
     console.log('---Files that would be uploaded---');
     console.log(table(text));
 
-    return;
+} else {
+    // Avoid loading credentials if we're in a dry-run
+    upload(Object.assign(options, { credentials: loadCredentials() })).then(
+        uploadedAssets => {
+            console.log('---Uploaded assets---');
+            uploadedAssets
+                .map(item => item.destination)
+                .map(getGoogleUrl)
+                .forEach(s => console.log(s));
+        }
+    );
 }
 
-// Avoid loading credentials if we're in a dry-run
-upload(Object.assign(options, { credentials: loadCredentials() })).then(
-    uploadedAssets => {
-        console.log('---Uploaded assets---');
-        uploadedAssets
-            .map(item => item.destination)
-            .map(getGoogleUrl)
-            .forEach(s => console.log(s));
-    }
-);

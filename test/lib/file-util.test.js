@@ -2,7 +2,7 @@ import test from 'ava';
 import os from 'os';
 import fs from 'fs-extra';
 import path from 'path';
-import fileUtil from '../../lib/file-util.js';
+import fileUtil from '../../lib/file-util';
 
 const workPath = path.join(os.tmpdir(), 'cdn-test');
 const file1 = path.join(workPath, 'test.txt');
@@ -20,19 +20,19 @@ test.before(async () => {
     ]);
 });
 
-test.after.always(() => fs.remove(workPath));
+test.after.always(() => {fs.remove(workPath)});
 
 test('should be a directory', t => {
-    t.true(fileUtil.isDirectory(workPath));
+    t.assert(fileUtil.isDirectory(workPath));
 });
 
 test('file should not be a directory', t => {
-    t.true(!fileUtil.isDirectory(file1));
+    t.assert(!fileUtil.isDirectory(file1));
 });
 
 test('unkown folder should not be a directory', t => {
     const folder = path.join(os.tmpdir(), '/random-blob-here');
-    t.true(!fileUtil.isDirectory(folder));
+    t.assert(!fileUtil.isDirectory(folder));
 });
 
 test('should include all actual files', t => {
@@ -54,8 +54,8 @@ test('should flatten and include all actual files', t => {
 test('makeAbsolute', t => {
     const cwd = process.cwd();
 
-    t.true(fileUtil.makeAbsolute() === cwd);
-    t.true(fileUtil.makeAbsolute('./some-path') === `${cwd}/some-path`);
-    t.true(fileUtil.makeAbsolute('/some-path') === '/some-path');
-    t.true(fileUtil.makeAbsolute('some-path') === `${cwd}/some-path`);
+    t.assert(fileUtil.makeAbsolute() === cwd);
+    t.assert(fileUtil.makeAbsolute('./some-path') === `${cwd}/some-path`);
+    t.assert(fileUtil.makeAbsolute('/some-path') === '/some-path');
+    t.assert(fileUtil.makeAbsolute('some-path') === `${cwd}/some-path`);
 });
