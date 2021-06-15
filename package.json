@@ -1,6 +1,6 @@
 {
     "name": "@finn-no/cdn-uploader",
-    "version": "3.1.5",
+    "version": "3.2.0",
     "description": "Small tool uploading assets to CDN backend (Google Cloud Storage)",
     "main": "index.js",
     "files": [
