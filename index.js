@@ -52,6 +52,18 @@ const {argv} = require('yargs')
         describe: 'Print a list of which files would be uploaded',
         type: 'boolean',
     })
+    .option('resumable', {
+        alias: 'r',
+        describe: 'Resumable upload',
+        default: true,
+        type: 'boolean',
+    })
+    .option('validation', {
+        alias: 'V',
+        describe: 'Validation for upload',
+        default: true,
+        type: 'boolean',
+    })
     .help()
     .version()
     .alias('help', ['h', '?'])
