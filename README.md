@@ -61,6 +61,7 @@ Options:
   -n, --dry-run        Print a list of which files would be uploaded   [boolean]
   -r, --resumable      Resumable upload                [boolean] [default: true]
   -V, --validation     Validation for upload           [boolean] [default: true]
+  -t, --timeout        Upload timeout                  [string] [default: 60000]
   -s, --batch-size     How many files to upload in each batch
                                                          [number] [default: 100]
   -h, -?, --help       Show help                                       [boolean]

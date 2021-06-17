@@ -52,15 +52,21 @@ const {argv} = require('yargs')
     })
     .option('resumable', {
         alias: 'r',
-        describe: 'Resumable upload',
+        describe: 'Enable a resumable upload',
         default: true,
         type: 'boolean',
     })
     .option('validation', {
         alias: 'V',
-        describe: 'Validation for upload',
-        default: true,
-        type: 'boolean',
+        describe: 'Possible values: "md5", "crc32c", or false. By default, data integrity is validated with an MD5 checksum for maximum reliability',
+        default: 'md5',
+        type: 'string',
+    })
+    .option('timeout', {
+        alias: 't',
+        describe: 'Set the HTTP request timeout in milliseconds. This option is not available for resumable uploads',
+        default: '60000',
+        type: 'string',
     })
     .option('batch-size', {
         alias: 's',
