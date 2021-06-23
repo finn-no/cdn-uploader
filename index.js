@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-
-
 const {argv} = require('yargs')
     .usage('$0 [options] <assetsFolder>')
     .demand(1)
@@ -64,6 +62,12 @@ const {argv} = require('yargs')
         default: true,
         type: 'boolean',
     })
+    .option('batch-size', {
+        alias: 's',
+        describe: 'How many files to upload in each batch',
+        default: 100,
+        type: 'number',
+    })
     .help()
     .version()
     .alias('help', ['h', '?'])
@@ -119,16 +123,22 @@ if (options.dryRun) {
 
     console.log('---Files that would be uploaded---');
     console.log(table(text));
-
 } else {
     // Avoid loading credentials if we're in a dry-run
     upload(Object.assign(options, { credentials: loadCredentials() })).then(
-        uploadedAssets => {
-            console.log('---Uploaded assets---');
-            uploadedAssets
-                .map(item => item.destination)
-                .map(getGoogleUrl)
-                .forEach(s => console.log(s));
+        ({results: uploadedAssets, errors}) => {
+            if (Array.isArray(uploadedAssets) && uploadedAssets.length > 0) {
+                console.log('\n---Uploaded assets---');
+                uploadedAssets
+                    .map(item => item.destination)
+                    .map(getGoogleUrl)
+                    .forEach(s => console.log(s));
+            }
+
+            if (Array.isArray(errors) && errors.length > 0) {
+                console.log('\n---Failing assets---');
+                errors.forEach(e => console.log(`${e.item.path}: ${e.message}`));
+            }
         }
     );
 }
