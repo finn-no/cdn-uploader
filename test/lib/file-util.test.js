@@ -20,7 +20,9 @@ test.before(async () => {
     ]);
 });
 
-test.after.always(() => {fs.remove(workPath)});
+test.after.always(async () => {
+    await fs.rm(workPath, { recursive: true, force: true })
+});
 
 test('should be a directory', t => {
     t.assert(fileUtil.isDirectory(workPath));

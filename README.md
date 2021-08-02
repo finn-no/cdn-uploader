@@ -23,17 +23,17 @@ return new Buffer(credentialString).toString('base64');
 Install:
 
 ```sh-session
-$ npm install @finn-no/cdn-uploader -g
+$ npm install @finn-no/cdn-uploader -g
 ```
 
 Actual usage:
 
 ```sh-session
-$ cdn-uploader /tmp/cdn-assets -a test-app
+$ cdn-uploader -a test-app /tmp/cdn-assets
 -- Uploaded assets --
 test-app/example.jpg
-test-app/css/SDFSDF.finn.css
-test-app/js/SDFSDF.finn.js
+test-app/css/example.css
+test-app/js/example.js
 ```
 
 Get help:
@@ -43,26 +43,28 @@ $ cdn-uploader -h
 cdn-uploader [options] <assetsFolder>
 
 Options:
-  --app-prefix, -a    Application prefix used in the CDN url [string] [required]
-  --key-filename, -k  JSON key file used to authenticate with Google Cloud
-                      Platform.
-                      If not set, the credentials option is used.       [string]
-  --credentials, -c   Stringified and base64 encoded version of the JSON key
-                      file used to authenticate with Google Cloud Platform.
-                      Can also be set as CDN_UPLOADER_CREDENTIALS environment
-                      variable                                          [string]
-  --bucket-name, -b   Google Cloud Storage bucket to use.
+  -a, --app-prefix     Application prefix used in the CDN url[string] [required]
+  -k, --key-filename   JSON key file used to authenticate with Google Cloud
+                       Platform.
+                       If not set, the credentials option is used.      [string]
+  -c, --credentials    Stringified and base64 encoded version of the JSON key
+                       file used to authenticate with Google Cloud Platform.
+                       Can also be set as CDN_UPLOADER_CREDENTIALS environment
+                       variable                                         [string]
+  -b, --bucket-name    Google Cloud Storage bucket to use.
                                               [string] [default: "fiaas-assets"]
-  --project-id, -p    Google Cloud Storage projectId.
+  -p, --project-id     Google Cloud Storage projectId.
                                                  [string] [default: "fiaas-gke"]
-  --cache-control     Override the cache-control header for the assets
+      --cache-control  Override the cache-control header for the assets
                                    [string] [default: "public, max-age=2592000"]
-  --flatten, -f       Flatten filestructure           [boolean] [default: false]
-  --dry-run, -n       Print a list of which files would be uploaded    [boolean]
-  --resumable, -r     Resumable upload                 [boolean] [default: true]
-  --validation, -V    Validation for upload            [boolean] [default: true]
-  --help, -h, -?      Show help                                        [boolean]
-  --version, -v       Show version number                              [boolean]
+  -f, --flatten        Flatten filestructure          [boolean] [default: false]
+  -n, --dry-run        Print a list of which files would be uploaded   [boolean]
+  -r, --resumable      Resumable upload                [boolean] [default: true]
+  -V, --validation     Validation for upload           [boolean] [default: true]
+  -s, --batch-size     How many files to upload in each batch
+                                                         [number] [default: 100]
+  -h, -?, --help       Show help                                       [boolean]
+  -v, --version        Show version number                             [boolean]
 ```
 
 All options can also be set as environment variables, using the `CDN_UPLOADER_`
