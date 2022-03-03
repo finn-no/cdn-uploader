@@ -13,6 +13,8 @@ const file1 = path.join(workPath, 'file1.txt');
 const file2 = path.join(workPath, 'file2.txt');
 const file3 = path.join(nested, 'file3.txt');
 
+const bucket = sinon.stub(Storage.prototype, 'bucket')
+
 test.before(async () => {
     await fs.ensureDir(nested);
 
@@ -31,7 +33,7 @@ test.after.always(async () => {
 test('should upload in batches', async t => {
     const times = [];
 
-    sinon.stub(Storage.prototype, 'bucket').callsFake(() => ({
+    bucket.callsFake(() => ({
         upload: () => {
             times.push(new Date())
             return new Promise(resolve => setTimeout(resolve, 10))
@@ -54,4 +56,29 @@ test('should upload in batches', async t => {
     // The 2 first uploads are done at the same time (batch size == 2) and then the third is done later
     t.assert(times[1].getMilliseconds() - times[0].getMilliseconds() < 2)
     t.assert(times[2].getMilliseconds() - times[0].getMilliseconds() > 9)
+})
+
+test('should retry on errors in upload', async t => {
+    let count = 0;
+
+    bucket.callsFake(() => ({
+        upload: () => {
+            count += 1
+            // Rejects the first upload of all 3 files and the second upload of the first file,
+            // i.e. the second upload of the second & third file will not fail.
+            return count < 5 ? Promise.reject() : Promise.resolve()
+        }
+    }));
+
+    const { results: uploadedAssets, errors } = await upload({
+        projectId: 'id',
+        credentials: 'cred',
+        bucketName: 'name',
+        appPrefix: 'prefix',
+        assetsFolder: workPath,
+        batchSize: 5
+    })
+
+    t.assert(uploadedAssets.length === 2)
+    t.assert(errors.length === 1)
 })

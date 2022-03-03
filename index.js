@@ -136,8 +136,10 @@ if (options.dryRun) {
             }
 
             if (Array.isArray(errors) && errors.length > 0) {
-                console.log('\n---Failing assets---');
-                errors.forEach(e => console.log(`${e.item.path}: ${e.message}`));
+                console.error('\n---Failing assets---');
+                errors.forEach(error => console.error(`${error.item.path}: ${error.message}`));
+
+                process.exit(1);
             }
         }
     );
