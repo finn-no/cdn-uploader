@@ -1,7 +1,7 @@
 {
     "name": "@finn-no/cdn-uploader",
     "version": "3.3.0",
-    "description": "Small tool uploading assets to CDN backend (Google Cloud Storage)",
+    "description": "Small tool for uploading assets to CDN backend (Google Cloud Storage)",
     "main": "index.js",
     "files": [
         "index.js",
@@ -13,9 +13,10 @@
         "lint": "eslint .",
         "lint:format": "eslint --fix .",
         "test": "ava",
-        "travis": "npm run lint && npm run test && npm run travis:e2e && npm run create-executable && npm run travis:e2e-executable",
-        "travis:e2e": "./index.js -p cookies-kpi -b ivar-supertest -a e2e-test test/content",
-        "travis:e2e-executable": "./cdn-uploader-linux -p cookies-kpi -b ivar-supertest -a e2e-test test/content"
+        "build": "npm run lint && npm run test && npm run e2e-test && npm run create-executable && npm run e2e-test-executable",
+        "build-no-e2e": "npm run lint && npm run test && npm run create-executable",
+        "e2e-test": "./index.js -p cookies-kpi -b ivar-supertest -a e2e-test test/content",
+        "e2e-test-executable": "./cdn-uploader-linux -p cookies-kpi -b ivar-supertest -a e2e-test test/content"
     },
     "repository": "finn-no/cdn-uploader",
     "keywords": [
