@@ -14,9 +14,8 @@
         "lint:format": "eslint --fix .",
         "test": "ava",
         "build": "npm run lint && npm run test && npm run e2e-test && npm run create-executable && npm run e2e-test-executable",
-        "build-no-e2e": "npm run lint && npm run test && npm run create-executable",
-        "e2e-test": "./index.js -p cookies-kpi -b ivar-supertest -a e2e-test test/content",
-        "e2e-test-executable": "./cdn-uploader-linux -p cookies-kpi -b ivar-supertest -a e2e-test test/content"
+        "e2e-test": "./index.js -c ${CDN_UPLOADER_CREDENTIALS} -p ${CDN_UPLOADER_PROJECT} -b finn-cdn-uploader-e2e -a e2e-test test/content",
+        "e2e-test-executable": "./cdn-uploader-linux -c ${CDN_UPLOADER_CREDENTIALS} -p ${CDN_UPLOADER_PROJECT} -b finn-cdn-uploader-e2e -a e2e-test test/content"
     },
     "repository": "finn-no/cdn-uploader",
     "keywords": [
