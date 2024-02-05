@@ -1,5 +1,7 @@
 # cdn-uploader
 
+:warning: **DEPRECATED:** This package is no longer actively maintained, and should not be used. Insead of `cdn-uploader`, use Eik to host your assets.
+
 > Small tool uploading assets to CDN backend (Google Cloud Storage)
 
 [![Build Status](https://travis-ci.org/finn-no/cdn-uploader.svg?branch=master)](https://travis-ci.org/finn-no/cdn-uploader)
