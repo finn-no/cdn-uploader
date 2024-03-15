@@ -1,6 +1,6 @@
 # cdn-uploader
 
-:warning: **DEPRECATED:** This package is no longer actively maintained, and should not be used. Insead of `cdn-uploader`, use Eik to host your assets.
+:warning: **DEPRECATED:** This package is no longer actively maintained, and should not be used. Insead of `cdn-uploader`, use Eik to host your assets. There's a migration guide bookmarked in `#nmp-eik` on Slack.
 
 > Small tool uploading assets to CDN backend (Google Cloud Storage)
 
